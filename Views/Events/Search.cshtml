@@ -1,0 +1,52 @@
+﻿@model IEnumerable<EventEase.Models.Event>
+
+@{
+    ViewData["Title"] = "Search Events";
+}
+
+<h1>Search Events</h1>
+
+<hr />
+
+<!-- SEARCH FORM -->
+<form asp-action="Search" method="get">
+    <div class="form-group">
+        <label>Search by Name:</label>
+        <input type="text" name="searchString" class="form-control" placeholder="Enter event name..." />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<hr />
+
+<!-- RESULTS TABLE -->
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.EventDate.ToShortDateString()</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No events found.</p>
+}

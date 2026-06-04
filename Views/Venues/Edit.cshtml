@@ -1,0 +1,79 @@
+﻿@model EventEase.Models.Venue
+@{
+    ViewData["Title"] = "Edit Venue";
+}
+
+<h1>Edit Venue</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-5">
+
+        {{!-- ✅ method="post" and enctype REQUIRED for file upload --}}
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="VenueId" />
+
+            {{!-- ✅ Keep existing ImageUrl so it's not lost if no new image is uploaded --}}
+            <input type="hidden" asp-for="ImageUrl" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Name -->
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group mb-3">
+                <label asp-for="Location" class="form-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <!-- Capacity -->
+            <div class="form-group mb-3">
+                <label asp-for="Capacity" class="form-label"></label>
+                <input asp-for="Capacity" class="form-control" type="number" min="1" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+
+            <!-- ✅ Current Image Preview -->
+            <div class="form-group mb-3">
+                <label class="form-label">Current Image</label><br />
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Current Venue Image"
+                         style="max-height: 150px; border-radius: 8px; margin-bottom: 10px;" />
+                }
+                else
+                {
+                    <p class="text-muted">No image uploaded yet.</p>
+                }
+            </div>
+
+            <!-- ✅ Upload New Image -->
+            <div class="form-group mb-4">
+                <label class="form-label">Upload New Image <small class="text-muted">(leave blank to keep current)</small></label>
+                <input type="file" name="imageFile" class="form-control" accept="image/*" />
+                <small class="text-muted">Accepted formats: JPG, PNG, GIF, WEBP</small>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group mt-2">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

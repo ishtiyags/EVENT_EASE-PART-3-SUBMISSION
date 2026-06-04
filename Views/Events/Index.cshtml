@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EventEase.Models.Event>
+
+<h1>Events</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Event</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Venue</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.EventDate</td>
+                <td>@item.Venue?.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

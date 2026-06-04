@@ -1,0 +1,44 @@
+﻿@model EventEase.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h1>Edit Booking</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="BookingId" />
+
+            <div class="form-group">
+                <label asp-for="CustomerName"></label>
+                <input asp-for="CustomerName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NumberOfTickets"></label>
+                <input asp-for="NumberOfTickets" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EventId">Event</label>
+                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId"></select>
+            </div>
+
+            <br />
+
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+        </form>
+    </div>
+</div>

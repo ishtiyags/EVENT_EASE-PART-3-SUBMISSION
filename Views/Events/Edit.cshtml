@@ -1,0 +1,49 @@
+﻿@model EventEase.Models.Event
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<h1>Edit Event</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="EventId" />
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EventDate"></label>
+                <input asp-for="EventDate" type="date" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VenueId">Venue</label>
+                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId"></select>
+            </div>
+
+            <br />
+
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+        </form>
+    </div>
+</div>
